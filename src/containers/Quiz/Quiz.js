@@ -6,6 +6,9 @@ import Question from './Question';
 import {browserHistory} from 'react-router';
 import CircularProgress from 'material-ui/CircularProgress';
 
+import {routepath} from '../../utils/config';
+const routePath = routepath();
+
 class Quiz extends Component {
   constructor(props) {
       super(props);
@@ -44,7 +47,7 @@ class Quiz extends Component {
   }
 
   _backToQuizList = () => {
-      browserHistory.push("quizes");
+      browserHistory.push(routePath+"quizes");
   }
 
   render() {

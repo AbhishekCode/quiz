@@ -9,17 +9,17 @@ import QuizList from './containers/QuizList/QuizList';
 import Quiz from './containers/Quiz/Quiz';
 import './index.css';
 
-
-
+import {routepath} from './utils/config';
+const path = routepath();
 const history = syncHistoryWithStore(browserHistory, store);
 
 ReactDOM.render(
     <Provider store={store}>
       <Router history={history}>
-        <Route path="/" component={App}>
+        <Route path={path} component={App}>
            <IndexRedirect to="Quizes"/>
-           <Route path="Quizes" component={QuizList}/>
-           <Route path="Quiz" component={Quiz}/>
+           <Route path="quizes" component={QuizList}/>
+           <Route path="quiz" component={Quiz}/>
            <Route path='*' component={QuizList}/>
         </Route>
       </Router>

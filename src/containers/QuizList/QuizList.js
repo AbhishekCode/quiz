@@ -5,6 +5,9 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {browserHistory} from 'react-router';
 import CircularProgress from 'material-ui/CircularProgress';
 
+import {routepath} from '../../utils/config';
+const routePath = routepath();
+
 import {loadQuizList, loadSelectedQuiz, loadQuizListFirebase} from '../../redux/reducers/quiz';
 
 class QuizList extends Component {
@@ -15,7 +18,7 @@ class QuizList extends Component {
 
   _selectQuiz = (index) => {
       this.props.dispatch(loadSelectedQuiz(this.props.quizList[index]));
-      browserHistory.push("quiz");
+      browserHistory.push(routePath+"quiz");
   }
 
   render() {
