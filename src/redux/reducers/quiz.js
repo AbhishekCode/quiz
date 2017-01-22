@@ -76,10 +76,11 @@ function getDataFulfilledAction(data) {
 }
 
 
-export function addQuiz() {
+export function addQuiz(values) {
+  console.log("addQuiz ", values);
 
   let payload = {
-    name: "this is new quiz",
+    name: values.quizName,
     questions:[
          {
           "question": "Which movie is this?",
@@ -105,9 +106,11 @@ export function addQuiz() {
   };
   console.log("movieQuiz ", moviequiz)
   return dispatch => {
-    const QuizList = database.ref('/QuizList');
-    var newChildRef = QuizList.push();
-    newChildRef.set(payload);
+      const QuizList = database.ref('/QuizList');
+      var newChildRef = QuizList.push();
+      newChildRef.set(payload).then(success=>{
+        console.log("Successfully added new question ", success);
+      });
    }
 }
 

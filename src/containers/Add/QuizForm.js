@@ -45,82 +45,38 @@ class QuizForm extends Component {
   render() {
     const { array: { push }, handleSubmit, pristine, reset, submitting } = this.props;
     return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Club Name</label>
-        <Field name="clubName" key="clubName" component={clubName =>
-          <div>
-            <input type="text" {...clubName} placeholder="Club Name"/>
-            {clubName.touched && clubName.error && <span>{clubName.error}</span>}
-          </div>
-        }/>
-      </div>
-      <FieldArray name="members" component={members =>
-        <ul>
-          <li>
-            <button type="button" onClick={() => push('members', {})}>Add Member</button>
-          </li>
-          {members.map((member, memberIndex) =>
-            <li key={memberIndex}>
-              <button
-                type="button"
-                title="Remove Member"
-                onClick={() => members.remove(memberIndex)}/>
-              <h4>Member #{memberIndex + 1}</h4>
-              <div>
-                <label>First Name</label>
-                <Field name={`${member}.firstName`} component={firstName =>
-                  <div>
-                    <input type="text" {...firstName} placeholder="First Name"/>
-                    {firstName.touched && firstName.error && <span>{firstName.error}</span>}
-                  </div>
-                }/>
-              </div>
-              <div>
-                <label>Last Name</label>
-                <Field name={`${member}.lastName`} component={lastName =>
-                  <div>
-                    <input type="text" {...lastName} placeholder="Last Name"/>
-                    {lastName.touched && lastName.error && <span>{lastName.error}</span>}
-                  </div>
-                }/>
-              </div>
-              <FieldArray name={`${member}.hobbies`} component={hobbies =>
-                <ul>
-                  <li>
-                    <button type="button" onClick={() => hobbies.push()}>Add Hobby</button>
-                  </li>
-                  {hobbies.map((hobby, hobbyIndex) =>
-                    <li key={hobbyIndex}>
-                      <button
-                        type="button"
-                        title="Remove Hobby"
-                        onClick={() => hobbies.remove(hobbyIndex)}/>
-                      <div>
-                        <Field name={hobby} component={hobbyProps =>
-                          <div>
-                            <input type="text" {...hobbyProps} placeholder={`Hobby #${hobbyIndex + 1}`}/>
-                            {hobbyProps.touched && hobbyProps.error && <span>{hobbyProps.error}</span>}
-                          </div>
-                        }/>
-                      </div>
-                    </li>
-                  )}
-                  {hobbies.error && <li className="error">{hobbies.error}</li>}
-                </ul>
-              }/>
-            </li>
-          )}
-        </ul>
-      }/>
-      <div>
-        <button type="submit" disabled={submitting}>Submit</button>
-        <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values
-        </button>
-      </div>
-    </form>
+         <form onSubmit={handleSubmit}>
+            <Field name="quizName" component={renderTextField} label="Quiz Name"/>
+            <FieldArray name="questions" component={questions=> this._renderQuestionFrom(questions)} />
+            <div>
+                <RaisedButton type="submit" label="submit" primary={true} disabled={pristine || submitting} onClick={this._submit} style={buttonStyle} />
+                <RaisedButton type="submit" label="Clear Values" primary={true} disabled={pristine || submitting} onClick={reset} tyle={buttonStyle} />
+            </div>
+        </form>
     );
   }
+   
+  _renderQuestionFrom = (questions) => {
+      console.log("Questions ", questions)
+      return (
+        <div>
+           <RaisedButton label="Add Question" onClick={() => questions.fields.push('questions', {})} style={buttonStyle} />
+           {questions && questions.fields && questions.fields.map((question, index) => this._renderQuestion(question, index))}
+        </div>
+      );
+  }
+
+  _renderQuestion = (question, index) =>{
+    return (
+       <div>
+           <Field name={`${question}.question`} component={renderTextField} label="Question"/>
+           <Field name={`${question}.imageURL`}component={renderTextField} label="Image Url"/>
+           <Field name={`${question}.answer`} component={renderTextField} label="Answer number"/>
+           <Field name={`${question}.explanation`} component={renderTextField} label="Explanation"/>
+       </div>
+    );
+  }
+
 };
 
 export default reduxForm({

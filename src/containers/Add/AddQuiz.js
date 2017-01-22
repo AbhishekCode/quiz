@@ -13,15 +13,17 @@ const routePath = routepath();
 class AddQuiz extends Component {
   constructor(props) {
       super(props);
-
-      this.props.dispatch(addQuiz());
   };
+
+  _handleSubmit = (values, dispatch) => {
+      this.props.dispatch(addQuiz(values));
+  }
 
   render() {
     return (
         <div className={css(styles.container)}>
            <span className={css(styles.heading)}>Add Quiz</span>
-           <QuizFrom />
+           <QuizFrom onSubmit={this._handleSubmit}/>
         </div>
     );
   }
