@@ -8,7 +8,7 @@ import CircularProgress from 'material-ui/CircularProgress';
 import {routepath} from '../../utils/config';
 const routePath = routepath();
 
-import {loadQuizList, loadSelectedQuiz, loadQuizListFirebase} from '../../redux/reducers/quiz';
+import {loadQuizList, loadSelectedQuiz, loadQuizListFirebase, addQuiz} from '../../redux/reducers/quiz';
 
 class QuizList extends Component {
   constructor(props) {

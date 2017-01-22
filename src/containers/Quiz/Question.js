@@ -60,7 +60,7 @@ const optionStyle = {
 }
 
 const imageStyle = {
-     width: getWidth(),
+     width: getWidth()*0.9,
      maxWidth: 500,
      height: 'auto'
 }

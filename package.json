@@ -1,6 +1,8 @@
 {
   "name": "quiz",
   "version": "0.1.0",
+  "display": "standalone",
+  "orientation": "portrait",
   "homepage": "https://abhishekcode.github.io/quiz",
   "private": true,
   "devDependencies": {

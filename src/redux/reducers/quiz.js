@@ -4,6 +4,9 @@ import database from '../../api/firebase';
 const LOAD_QUIZ_LIST = "LOAD_QUIZ_LIST";
 const LOAD_SELECTED_QUIZ = "LOAD_SELECTED_QUIZ";
 
+const ADD_QUIZ_SUCCESS = "";
+const ADD_QUIZ_FAILED = "";
+
 const ACTION_DATA_REQUESTED= 'ACTION_DATA_REQUESTED';
 const ACTION_DATA_FULFILLED= 'ACTION_DATA_FULFILLED';
 const ACTION_DATA_REJECTED= 'ACTION_DATA_REJECTED';
@@ -31,8 +34,8 @@ export const loadQuizListFirebase = () => {
   return dispatch => {
     dispatch(getDataRequestedAction());
     return database.ref('/').once('value', snap => {
-      const invite = snap.val();
-      dispatch(getDataFulfilledAction(invite))
+      const data = snap.val();
+      dispatch(getDataFulfilledAction(data))
     })
     .catch((error) => {
       console.log(error);
@@ -54,12 +57,72 @@ function getDataRejectedAction() {
 }
 
 function getDataFulfilledAction(data) {
-  console.log("Firebase data ", data);
+  //hack to parse firebase data in array
+  var quizlist = data.QuizList;
+  var result = [];
+  for(let i in quizlist)
+    result.push([i, quizlist [i]]);
+  
+  let realQuizList = [];
+  for(let i=0; i<result.length; i++){
+    realQuizList.push(result[i][1]);
+  }
+  realQuizList.reverse();
+  console.log("Quiz list recieved  ", realQuizList)
   return {
     type: ACTION_DATA_FULFILLED,
-    data: data.QuizList
+    data: realQuizList
   };
 }
+
+
+export function addQuiz() {
+
+  let payload = {
+    name: "this is new quiz",
+    questions:[
+         {
+          "question": "Which movie is this?",
+          "imageURL" : "http://www.glamsham.com/movies/news/13/jul/3-idiots-wallpapers.jpg",
+          "options" : [
+                    {
+                    "text": "3 idiots"
+                    },
+                    {
+                    "text": "Tare Zameen Par"
+                    },
+                    {
+                    "text": "PK"
+                    },
+                    {
+                    "text": "Dil Chahta hai"
+                    }
+              ],
+        "answer": 0,
+        "explanation": "explanation about answer"
+      }
+    ]
+  };
+  console.log("movieQuiz ", moviequiz)
+  return dispatch => {
+    const QuizList = database.ref('/QuizList');
+    var newChildRef = QuizList.push();
+    newChildRef.set(payload);
+   }
+}
+
+const addQuizSucess = () => {
+  return {
+    type: ADD_QUIZ_SUCCESS 
+  }
+}
+
+const addQuizFailed = () => {
+  return {
+    type: ADD_QUIZ_FAILED
+  }
+}
+
 
 
 
