@@ -77,34 +77,22 @@ function getDataFulfilledAction(data) {
 
 
 export function addQuiz(values) {
-  console.log("addQuiz ", values);
-
+  let questions = [];
+  for(let i=0; i<values.questions.length; i++) {
+    let ques = {
+      question : values.questions[i].question,
+      options : values.questions[i].options,
+      imageURL : values.questions[i].imageURL,
+      explanation : values.questions[i].explanation,
+      answer : values.questions[i].answer
+    }
+    questions.push(ques)
+  }
+   
   let payload = {
     name: values.quizName,
-    questions:[
-         {
-          "question": "Which movie is this?",
-          "imageURL" : "http://www.glamsham.com/movies/news/13/jul/3-idiots-wallpapers.jpg",
-          "options" : [
-                    {
-                    "text": "3 idiots"
-                    },
-                    {
-                    "text": "Tare Zameen Par"
-                    },
-                    {
-                    "text": "PK"
-                    },
-                    {
-                    "text": "Dil Chahta hai"
-                    }
-              ],
-        "answer": 0,
-        "explanation": "explanation about answer"
-      }
-    ]
+    questions: questions
   };
-  console.log("movieQuiz ", moviequiz)
   return dispatch => {
       const QuizList = database.ref('/QuizList');
       var newChildRef = QuizList.push();

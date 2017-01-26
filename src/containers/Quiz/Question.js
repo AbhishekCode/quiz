@@ -12,12 +12,10 @@ class Question extends Component {
   };
 
   _selectAnswer = (index) => {
-     console.log("Selected answer ",index);
-     if(index == this.props.question.answer) {
-       console.log("Correct answeer");
+     let answeredOption = index + 1; // zero index +1
+     if(answeredOption == this.props.question.answer) {
        this.props.onAnswered(index, true);
      }else {
-       console.log("wrong answer");
        this.props.onAnswered(index , false);
      }
   };
@@ -35,17 +33,15 @@ class Question extends Component {
               }
           </div>
           <Divider />
-           {this.props.answered && <span>{question.explanation}</span>}
         </div>
     );
   };
 
   _renderOption = (option,index) => {
-    console.log("props answered ", this.props.answered)
-      const correctAnswer = (index == this.props.question.answer && this.props.answered) ? true : false;
+      const correctAnswer = (index+1 == this.props.question.answer && this.props.answered) ? true : false;
       const wrongAnswer = (this.props.answered && !correctAnswer && index == this.props.answeredIndex) ? true : false;
       return (
-         <RaisedButton label={option.text} style={optionStyle} primary={correctAnswer} 
+         <RaisedButton label={option} style={optionStyle} primary={correctAnswer} 
          secondary={wrongAnswer} onClick={()=>this._selectAnswer(index)} />
       );
   };

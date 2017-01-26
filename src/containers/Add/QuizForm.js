@@ -32,6 +32,16 @@ const renderPasswordField = ({ input, label, meta: { touched, error }, ...custom
   />
 )
 
+const renderSelectField = ({ input, label, meta: { touched, error }, children, ...custom }) => (
+  <SelectField
+    floatingLabelText={label}
+    errorText={touched && error}
+    {...input}
+    onChange={(event, index, value) => input.onChange(value)}
+    children={children}
+    {...custom}/>
+)
+
 const buttonStyle = {
   margin: 12
 }
@@ -50,7 +60,7 @@ class QuizForm extends Component {
             <FieldArray name="questions" component={questions=> this._renderQuestionFrom(questions)} />
             <div>
                 <RaisedButton type="submit" label="submit" primary={true} disabled={pristine || submitting} onClick={this._submit} style={buttonStyle} />
-                <RaisedButton type="submit" label="Clear Values" primary={true} disabled={pristine || submitting} onClick={reset} tyle={buttonStyle} />
+                <RaisedButton type="submit" label="Clear Values" primary={true} disabled={pristine || submitting} onClick={reset} style={buttonStyle} />
             </div>
         </form>
     );
@@ -68,11 +78,29 @@ class QuizForm extends Component {
 
   _renderQuestion = (question, index) =>{
     return (
-       <div>
-           <Field name={`${question}.question`} component={renderTextField} label="Question"/>
-           <Field name={`${question}.imageURL`}component={renderTextField} label="Image Url"/>
-           <Field name={`${question}.answer`} component={renderTextField} label="Answer number"/>
-           <Field name={`${question}.explanation`} component={renderTextField} label="Explanation"/>
+       <div key={"div"+index}>
+           <Field name={`${question}.question`} key={"question"+index} component={renderTextField} label="Question"/>
+           <Field name={`${question}.imageURL`} key={"imageURL"+index} component={renderTextField} label="Image Url"/>
+           <FieldArray name={`${question}.options`} key={"options"+index} component={options=> this._renderAnswerForm(options)} />
+           <Field name={`${question}.answer`} key={"answer"+index} component={renderTextField} label="Answer number"/>
+           <Field name={`${question}.explanation`} key={"explanation"+index} component={renderTextField} label="Explanation"/>
+       </div>
+    );
+  }
+
+  _renderAnswerForm = (options) =>{
+     return(
+        <div>
+           <RaisedButton label="Add Answer" onClick={() => options.fields.push('options', {})} style={buttonStyle} />
+           {options && options.fields && options.fields.map((option, index) => this._renderAnswerOption(option, index))}
+        </div>
+     );
+  }
+
+   _renderAnswerOption= (option, index) =>{
+    return (
+       <div key={"div"+index}>
+           <Field name={`${option}`} key={"option"+index} component={renderTextField} label="option"/>
        </div>
     );
   }
