@@ -4,62 +4,23 @@
       {
           "question": "Which movie is this?",
           "imageURL" : "http://www.glamsham.com/movies/news/13/jul/3-idiots-wallpapers.jpg",
-          "options" : [
-                    {
-                    "text": "3 idiots"
-                    },
-                    {
-                    "text": "Tare Zameen Par"
-                    },
-                    {
-                    "text": "PK"
-                    },
-                    {
-                    "text": "Dil Chahta hai"
-                    }
-              ],
-        "answer": 0,
-        "explanation": "explanation about answer"
+          "options" : [ "3 idiots", "Tare Zameen Par", "PK", "Dil Chahta hai"],
+          "answer": 0,
+          "explanation": "explanation about answer"
       },
       {
           "question": "Which movie is this?",
           "imageURL" : "https://i.ytimg.com/vi/czt_Eroo_bs/hqdefault.jpg",
-          "options" : [
-                    {
-                    "text": "Gunda"
-                    },
-                    {
-                    "text": "Loha"
-                    },
-                    {
-                    "text": "Rowdy Rathore"
-                    },
-                    {
-                    "text": "Sooryavansham"
-                    }
-              ],
-        "answer": 0,
-        "explanation": "explanation about answer"
+          "options" : [ "Gunda", "Loha", "Rowdy Rathore", "Sooryavansham"],
+          "answer": 0,
+          "explanation": "explanation about answer"
       },
       {
           "question": "Which movie is this?",
           "imageURL" : "http://cdn3.thr.com/sites/default/files/imagecache/landscape_928x523/2015/07/bombay-velvet.jpg",
-          "options" : [
-                    {
-                    "text": "Bombat velvet"
-                    },
-                    {
-                    "text": "Barfi"
-                    },
-                    {
-                    "text": "Tamasha"
-                    },
-                    {
-                    "text": "Roy"
-                    }
-              ],
-        "answer": 0,
-        "explanation": "explanation about answer"
+          "options" : [ "Bombat velvet", "Barfi", "Tamasha", "Roy"],
+          "answer": 0,
+          "explanation": "explanation about answer"
       }   
    ]
 }

@@ -52,7 +52,6 @@ class Quiz extends Component {
 
   render() {
     const selectedQuestion = this.state.selectedQuestion;
-    console.log("selectedQuestion",selectedQuestion);
     return (
         <div className={css(styles.container)}>
 
@@ -106,7 +105,6 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-    console.log("State  loaded ", state);
   return {
      quiz: state.quiz.selectedQuiz || undefined
   };

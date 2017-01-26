@@ -68,7 +68,6 @@ function getDataFulfilledAction(data) {
     realQuizList.push(result[i][1]);
   }
   realQuizList.reverse();
-  console.log("Quiz list recieved  ", realQuizList)
   return {
     type: ACTION_DATA_FULFILLED,
     data: realQuizList
