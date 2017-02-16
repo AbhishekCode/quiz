@@ -21,9 +21,13 @@ class QuizList extends Component {
       browserHistory.push(routePath+"quiz");
   }
 
+  _home = () => {
+      browserHistory.push(routePath+"/home");
+  }
   render() {
     return (
         <div className={css(styles.container)}>
+         <RaisedButton label={"Home"} primary={true} style={nextButtonStyle} onClick={this._home} />
           {
             !this.props.quizList && <CircularProgress />
           }

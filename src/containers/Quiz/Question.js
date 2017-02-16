@@ -56,9 +56,10 @@ const optionStyle = {
 }
 
 const imageStyle = {
-     width: getWidth()*0.9,
+     width: 'auto',
      maxWidth: 500,
-     height: 'auto'
+     height: 'auto',
+     maxHeight: 300,
 }
 
 const styles = StyleSheet.create({

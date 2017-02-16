@@ -19,10 +19,15 @@ class AddQuiz extends Component {
       browserHistory.push(routePath+"/home");
       this.props.dispatch(addQuiz(values));
   }
+ 
+  _home = () => {
+      browserHistory.push(routePath+"/home");
+  }
 
   render() {
     return (
         <div className={css(styles.container)}>
+           <RaisedButton label={"Home"} primary={true} style={buttonStyle} onClick={this._home} />
            <span className={css(styles.heading)}>Add Quiz</span>
            <QuizFrom onSubmit={this._handleSubmit}/>
         </div>
