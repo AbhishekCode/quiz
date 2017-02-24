@@ -83,7 +83,6 @@ class QuizForm extends Component {
            <Field name={`${question}.imageURL`} key={"imageURL"+index} component={renderTextField} label="Image Url"/>
            <FieldArray name={`${question}.options`} key={"options"+index} component={options=> this._renderAnswerForm(options)} />
            <Field name={`${question}.answer`} key={"answer"+index} component={renderTextField} label="Answer number"/>
-           <Field name={`${question}.explanation`} key={"explanation"+index} component={renderTextField} label="Explanation"/>
        </div>
     );
   }
