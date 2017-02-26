@@ -99,7 +99,7 @@ class QuizForm extends Component {
    _renderAnswerOption= (option, index) =>{
     return (
        <div key={"div"+index}>
-           <Field name={`${option}`} key={"option"+index} component={renderTextField} label="option"/>
+           <Field name={`${option}`} value={""} key={"option"+index} component={renderTextField} label={`option ${index+1}`}/>
        </div>
     );
   }

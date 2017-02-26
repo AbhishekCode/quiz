@@ -1,5 +1,6 @@
 import Auth0Lock from 'auth0-lock'
 import { browserHistory } from 'react-router'
+import { EventEmitter } from 'events'
 
 export default class AuthService {
   constructor(clientId, domain) {
@@ -24,6 +25,14 @@ export default class AuthService {
     // navigate to the home route
     this.lock.hide()
     browserHistory.replace('/home')
+
+    this.lock.getProfile(authResult.idToken, (error, profile) => {
+      if (error) {
+        console.log('Error loading the Profile', error)
+      } else {
+        this.setProfile(profile)
+      }
+    })
   }
 
   login() {
@@ -34,6 +43,19 @@ export default class AuthService {
   loggedIn() {
     // Checks if there is a saved token and it's still valid
     return !!this.getToken()
+  }
+
+  setProfile(profile) {
+    // Saves profile data to local storage
+    localStorage.setItem('profile', JSON.stringify(profile))
+    // Triggers profile_updated event to update the UI
+    this.emit('profile_updated', profile)
+  }
+
+  getProfile() {
+    // Retrieves the profile data from local storage
+    const profile = localStorage.getItem('profile')
+    return profile ? JSON.parse(localStorage.profile) : {}
   }
 
   setToken(idToken) {

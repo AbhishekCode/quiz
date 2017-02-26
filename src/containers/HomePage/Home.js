@@ -50,7 +50,7 @@ class Home extends Component {
              <RaisedButton label={"Add New quiz"} primary={true} style={buttonStyle} onClick={this._addNewQuiz}/> :
              <RaisedButton label={"Login"} primary={true} style={buttonStyle} onClick={this._login}/> 
            }
-           {loggedin && <RaisedButton label={"LogOut"} primary={true} style={buttonStyle} onClick={this._logout}/> }
+           {loggedin && <RaisedButton label={"LogOut"} secondary={true} style={buttonStyle} onClick={this._logout}/> }
         </div>
     );
   }
