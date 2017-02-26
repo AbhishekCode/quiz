@@ -91,7 +91,9 @@ const styles = StyleSheet.create({
        flex: 1,
        flexDirection: 'column',
        justyfyContent: 'center',
-       alignItems: 'center'
+       alignItems: 'center',
+       width: '100%',
+       overflow: 'hidden'
     },
     result: {
        display: 'flex',

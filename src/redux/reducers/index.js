@@ -4,12 +4,14 @@ import { routerReducer } from 'react-router-redux';
 // import { reducer as reduxAsyncConnect } from 'redux-async-connect';
 // Our custom reducers
 import { reducer as quiz } from './quiz';
+import {reducer as user} from './user';
 
 
 
 // combining all
 const reducer =  combineReducers({
   quiz,
+  user,
   routing: routerReducer,
   form: formReducer
 });

@@ -26,7 +26,7 @@ class Question extends Component {
     return (
         <div className={css(styles.container)}>
           <span className={css(styles.question)}>{questionText}</span>
-          <img src={question.imageURL} style={imageStyle} />
+          {question.imageURL && <img src={question.imageURL} style={imageStyle} />}
           <div className={css(styles.optionContainer)}>
               { 
                 question.options.map((option, index) => this._renderOption(option, index))
@@ -57,7 +57,7 @@ const optionStyle = {
 
 const imageStyle = {
      width: 'auto',
-     maxWidth: 500,
+     maxWidth: '100%',
      height: 'auto',
      maxHeight: 300,
 }
