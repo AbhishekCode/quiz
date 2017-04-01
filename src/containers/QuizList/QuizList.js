@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
 import {browserHistory} from 'react-router';
 import CircularProgress from 'material-ui/CircularProgress';
+import {List, ListItem} from 'material-ui/List';
 
 import {routepath} from '../../utils/config';
 const routePath = routepath();
@@ -31,10 +32,13 @@ class QuizList extends Component {
           {
             !this.props.quizList && <CircularProgress />
           }
-          { 
-            this.props.quizList && this.props.quizList.map((quiz, index) => 
-             <RaisedButton label={quiz.name} style={nextButtonStyle} onClick={()=>this._selectQuiz(index)} />)
-          }
+          <List style={{width:'100%'}}>
+            { 
+              this.props.quizList && this.props.quizList.map((quiz, index) => 
+                <ListItem style={{width:'100%'}} primaryText={quiz.name} secondaryText={'by '+quiz.user} onClick={()=>this._selectQuiz(index)} />
+              )
+            }
+          </List>
         </div>
     );
   }
@@ -48,6 +52,7 @@ const styles = StyleSheet.create({
     container: {
        display: 'flex',
        flex: 1,
+       width: '100%',
        flexDirection: 'column',
        justyfyContent: 'center',
        alignItems: 'center',

@@ -17,7 +17,8 @@ class AddQuiz extends Component {
 
   _handleSubmit = (values, dispatch) => {
       browserHistory.push(routePath+"/home");
-      this.props.dispatch(addQuiz(values));
+      const user = this.props.auth.getProfile();
+      this.props.dispatch(addQuiz(values, user ));
   }
  
   _home = () => {

@@ -75,23 +75,29 @@ function getDataFulfilledAction(data) {
 }
 
 
-export function addQuiz(values) {
+export function addQuiz(values, user) {
   let questions = [];
-  for(let i=0; i<values.questions.length; i++) {
-    let ques = {
-      question : values.questions[i].question,
-      options : values.questions[i].options,
-      imageURL : values.questions[i].imageURL,
-      explanation : values.questions[i].explanation,
-      answer : values.questions[i].answer
+  if(values.questions){ 
+    for(let i=0; i<values.questions.length; i++) {
+      let ques = {
+        question : values.questions[i].question,
+        options : values.questions[i].options,
+        imageURL : values.questions[i].imageURL,
+        explanation : values.questions[i].explanation,
+        answer : values.questions[i].answer
+      }
+      questions.push(ques)
     }
-    questions.push(ques)
   }
    
   let payload = {
     name: values.quizName,
-    questions: questions
+    questions: questions, 
+    user: user.name, 
+    userId: user.user_id
   };
+  console.log("user ", user);
+  console.log("payload ", payload);
   return dispatch => {
       const QuizList = database.ref('/QuizList');
       var newChildRef = QuizList.push();

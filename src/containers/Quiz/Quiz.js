@@ -12,6 +12,7 @@ const routePath = routepath();
 class Quiz extends Component {
   constructor(props) {
       super(props);
+      let firstQuestion = this.props.quiz.questions && this.props.quiz.questions.length > 0 ?  this.props.quiz.questions[0] : undefined;
       this.state = {
         questionIndex: 0,
         answeredIndex:-1,
@@ -19,7 +20,7 @@ class Quiz extends Component {
         correctAnswer: 0,
         answered: false,
         finished: false,
-        selectedQuestion: this.props.quiz.questions[0]
+        selectedQuestion: firstQuestion
       };
   };
 
@@ -58,7 +59,7 @@ class Quiz extends Component {
             {!selectedQuestion &&
                 <div>
                    <CircularProgress />
-                   <span>Loading Quiz</span>
+                   <span>Loading Quiz, Or Quiz is empty</span>
                 </div>
             }
          
