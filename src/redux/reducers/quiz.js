@@ -83,7 +83,6 @@ export function addQuiz(values, user) {
         question : values.questions[i].question,
         options : values.questions[i].options,
         imageURL : values.questions[i].imageURL,
-        explanation : values.questions[i].explanation,
         answer : values.questions[i].answer
       }
       questions.push(ques)
